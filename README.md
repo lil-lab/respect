@@ -1,2 +1,5 @@
-# respect
-Home for the paper "Retrospective Learning from Interactions"
+# Retrospective Learning from Interactions
+
+Project page: <https://lil-lab.github.io/respect/>
+
+Under construction

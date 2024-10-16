@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="A simple method to learn from human-AI interactions annotations-free.">
+    <meta property="og:title" content="Retrospective Learning from Interactions"/>
+    <meta property="og:description" content="A simple method to learn from human-AI interactions annotations-free."/>
+    <meta property="og:url" content="https://lil-lab.github.io/respect/"/>
+    <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+    <meta property="og:image" content="static/images/retrospect.png" />
+    <meta property="og:image:width" content="1916"/>
+    <meta property="og:image:height" content="694"/>
+
+    <meta name="twitter:title" content="Retrospective Learning from Interactions">
+    <meta name="twitter:description" content="A simple method to learn from human-AI interactions annotations-free.">
+    <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+    <meta name="twitter:image" content="static/images/retrospect.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="keywords" content="human-AI, interactive learning, natural language processing, artificial intelligence, self improve">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- MathJax CDN -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+
+    <title>Retrospective Learning from Interactions</title>
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="static/css/bulma.min.css" />
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css" />
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css" />
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+    />
+    <link rel="stylesheet" href="static/css/index.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+    <script defer src="static/js/fontawesome.all.min.js"></script>
+    <script src="static/js/bulma-carousel.min.js"></script>
+    <script src="static/js/bulma-slider.min.js"></script>
+    <script src="static/js/index.js"></script>
+  </head>
+  <body>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title">
+                Retrospective Learning from Interactions
+              </h1>
+              <div class="is-size-5 publication-authors">
+                <!-- Paper authors -->
+                <span class="author-block">
+                  <a href="https://chenzizhao.github.io/" target="_blank"
+                    >Zizhao Chen</a
+                  >,
+                </span>
+                <span class="author-block">
+                  <a href="https://momergul.github.io/" target="_blank"
+                    >Mustafa Omer Gul</a
+                  >,
+                </span>
+                <span class="author-block">
+                  Yiwei Chen,
+                </span>
+                <span class="author-block">
+                  Gloria Geng,
+                </span>
+                <span class="author-block">
+                  <a href="https://annshin.github.io/" target="_blank"
+                    >Anne Wu</a>,
+                </span>
+                <span class="author-block">
+                  <a href="https://yoavartzi.com/" target="_blank"
+                    >Yoav Artzi</a
+                  >
+                </span>
+              </div>
+
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  Cornell Tech
+                  <br />
+                  October 2024
+                  <!-- <br />Conferance name and year</span> -->
+                <!-- <span class="eql-cntrb">
+                  <small><br /><sup>*</sup>Indicates Equal Contribution</small>
+                </span> -->
+              </div>
+
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- Arxiv PDF link -->
+                  <span class="link-block">
+                    <a
+                      href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf"
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Paper</span>
+                    </a>
+                  </span>
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a
+                      href="https://github.com/lil-lab/respect/"
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code</span>
+                    </a>
+                  </span>
+
+                  <!-- ArXiv abstract Link -->
+                  <span class="link-block">
+                    <a
+                      href="https://arxiv.org/abs/<ARXIV PAPER ID>"
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                      </span>
+                      <span>arXiv</span>
+                    </a>
+                  </span>
+
+
+                  <!-- Data Link -->
+                  <!-- <span class="link-block">
+                    <a
+                      href="https://arxiv.org/abs/<ARXIV PAPER ID>"
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <i class="fas fa-database"></i>
+                      </span>
+                      <span>Data</span>
+                    </a>
+                  </span> -->
+
+
+                  <!-- Demo Link -->
+                  <!-- <span class="link-block">
+                    <a
+                      href="https://arxiv.org/abs/<ARXIV PAPER ID>"
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                          <i class="ai ai-conversation"></i>
+                      </span>
+                      <span>Demo</span>
+                    </a>
+                  </span> -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Paper abstract -->
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Multi-turn interactions between large language models (LLMs) and users naturally include implicit feedback signals. If an LLM responds in an unexpected way to an instruction, the user is likely to signal it by rephrasing the request, expressing frustration, or pivoting to an alternative task. Such signals are task-independent and occupy a relatively constrained subspace of language, allowing the LLM to identify them even if it fails on the actual task. This creates an avenue for continually learning from interactions without additional annotations. We introduce <i>ReSpect</i>, a method to learn from such signals in past interactions via retrospection. We deploy ReSpect in a new multimodal interaction scenario, where humans instruct an LLM to solve an abstract reasoning task with a combinatorial solution space. Through thousands of interactions with humans, we show how ReSpect gradually improves task completion rate from 31% to 82%, all without any external annotation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End paper abstract -->
+
+    <!--Method section -->
+    <section class="section hero">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Methods</h2>
+            <div class="content has-text-justified">
+              <figure>
+                <img src="static/images/retrospect.png" width="100%">
+                <figcaption>ReSpect: Learning to act via retrospecting previous interactions</figcaption>
+              </figure>
+              <p>
+                We deploy an LLM policy \(\pi_{\theta_{\rho}}(a \vert x) \) to interact with users in multi-turn interactions. Following each round, the LLM reasons retrospectively about each of its actions (highlighted in blue) to decode feedback given the interaction context, including follow up utterances. After each round, the model is retrained using all data aggregated so far \(D_{\leq \rho}\). 
+                The LLM improves over time without any external annotations. The plot on the right shows the performance curve in our experiments - the LLM improves from 31% to 82% task completion rate over six rounds.
+              </p>
+
+              <figure>
+                <img src="static/images/interaction.png" width="100%">
+                <figcaption>Multiref: The interaction scenario we use in our experiments.
+                </figcaption>
+              </figure>
+              <p>
+                Multiref is a multi-turn reference game<a href="https://www.youtube.com/watch?v=PsagLVytv_M" target="_blank"> <i class="fab fa-youtube"></i> </a>. A speaker and a listener both observe a shared set of tangram shapes, but in different order. The goal of the speaker is to describe a subset of targets for the listener to select. Because the target requires multiple abstract shapes, humans often communicate the targets gradually over multiple turns. As an interaction progresses naturally, the speaker produces implicit feedback signals that validate or reject the listener's actions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--End method section -->
+
+
+    <!--Result section -->
+    <section class="section hero">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Results</h2>
+            <div class="content has-text-justified">
+              <figure>
+                <img src="static/images/results.png" width="100%">
+                <figcaption>Task performance and efficiency improve as the policy learns from more past interactions. </figcaption>
+              </figure>
+              <p>
+                We present deployment results across three rounds for six concurrent systems, and three more rounds for the top system (B-SUP), together with human-human references (HH) and a redeployment of the initial policy \(\pi_{\theta_0}\) (CONTROL). 
+                <i>Left:</i> interaction-level success rate (\(\uparrow\), higher is better). 
+                <i>Center:</i> interaction-level efficiency by # turns per interactions (\(\downarrow\)). 
+                <i>Right:</i> micro-level performance by click accuracy (\(\uparrow\)).
+              </p>
+
+              <figure>
+                <img src="static/images/human_eval.png" width="100%">
+                <figcaption>Turn-level performance of B-SUP evaluated by post-hoc human annotations.
+                </figcaption>
+              </figure>
+              <p>
+                More granularly, we present the turn-level performance of B-SUP and controls, evaluated by post-hoc human annotations.
+                <i>Left:</i> % turns where the policy's action \(\hat a\) matches exactly the human listener's action \(a^*\) (\(\uparrow\)). 
+                <i>Center:</i> similarity between the policy's action and the human listener's action (\(\uparrow\)). Even actions that receive negative feedback in deployment (NEG FB) are increasingly similar to human actions.
+                <i>Right:</i> % turns that annotated to have received positive implicit feedback from human listeners (\(\uparrow\)).
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--End result section -->
+
+    <!--BibTex citation -->
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <h2 class="title">BibTeX</h2>
+        <pre><code>BibTex Code Here</code></pre>
+      </div>
+    </section>
+    <!--End BibTex citation -->
+
+    <footer class="footer">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p>
+                This page was built using the
+                <a
+                  href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                  target="_blank"
+                  >Academic Project Page Template
+                </a>.
+                This website is licensed under a
+                <a
+                  rel="license"
+                  href="http://creativecommons.org/licenses/by-sa/4.0/"
+                  target="_blank"
+                  >Creative Commons Attribution-ShareAlike 4.0 International
+                  License</a
+                >.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>
