@@ -1,0 +1,21 @@
+include 'src/config/multitask.gin'
+
+LocalConfig:
+    checkpoint_path = None
+
+MultiTaskConfig:
+    lookahead = True
+
+TaskConfig:
+    gen_constrained_decoding = True
+
+IglConfig:
+    reward_remap = {1:1, -1:-1, 0:0}
+    kto_only = True
+    kto_beta = 0.5  # 0.1
+    label_smoothing = 0.01  # 0
+
+XTrainingArguments:
+    learning_rate = 1e-5  # 1e-6
+    lr_scheduler_type = "constant_with_warmup"
+    optim = "rmsprop"

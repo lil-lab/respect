@@ -1,0 +1,6 @@
+{
+  # Treatment level arguments
+  "name": "config for the non-pragmatic oracle bots",
+  "treatment_name": "oracle", # The treatment name is used for the botTreatment factor
+  "manager_type": "oracle",
+}

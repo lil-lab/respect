@@ -1,0 +1,6 @@
+{
+  # Treatment level arguments
+  "name": "config for the dummy bots",
+  "treatment_name": "dummy", # The treatment name is used for the botTreatment factor
+  "manager_type": "dummy",
+}

@@ -1,0 +1,174 @@
+# Macros
+input_dir = "data"
+debug = False
+igl_prompt_id = "02_one_history_binary"
+igl_dataset_group = ["jul182425"]
+
+LocalConfig:
+    debug = %debug
+    input_dir = %input_dir
+    checkpoint = "HuggingFaceM4/idefics2-8b"
+    checkpoint_path = ""
+    # igl model resume
+    resume_from_checkpoint_path = None
+    legal_token_only = False
+    keep_max_turns = None
+
+BitsAndBytesConfig:
+    load_in_4bit = True
+    bnb_4bit_quant_type = "nf4"
+    bnb_4bit_compute_dtype = %torch.float16
+    # diff from idefics2 default
+    llm_int8_skip_modules = ["lm_head", "embed_tokens"]  
+
+# keep in sync with utils.py and config.gin
+LoraConfig:
+    r = 8
+    lora_alpha = 8
+    target_modules='.*(text_model|modality_projection|perceiver_resampler).*(down_proj|gate_proj|up_proj|k_proj|q_proj|v_proj|o_proj).*$'
+    lora_dropout = 0.1
+    init_lora_weights="gaussian"
+    use_dora = False
+
+
+DatasetConfig:
+    input_dir = %input_dir
+    debug = %debug
+
+TaskConfig:
+    gen_do_sample = True
+    gen_temperature = 1.0
+    gen_constrained_decoding = False
+    seq2seq_recover_generation_probs = True
+    seq2seq_recover_h_probs = True
+
+ann/DatasetConfig:
+    dataset = "jun_5_train_and_test_ann"
+    simple_filter = False
+
+ann/TaskConfig:
+    task = "Seq2SeqTask"
+    name = "ann"
+    dataset_config = @ann/DatasetConfig()
+    train_or_eval = "eval"
+
+#### IGL classes begin ####
+
+igl_pos/DatasetConfig:
+    dataset = %igl_dataset_group
+    simple_filter = True
+    igl_pos_only = True
+    igl_prompt_id = %igl_prompt_id
+
+igl_pos/TaskConfig:
+    task = "IglTask"
+    name = "igl_pos"
+    dataset_config = @igl_pos/DatasetConfig()
+    train_or_eval = "train"
+
+igl_neg/DatasetConfig:
+    dataset = %igl_dataset_group
+    simple_filter = True
+    igl_neg_only = True
+    igl_prompt_id = %igl_prompt_id
+
+igl_neg/TaskConfig:
+    task = "IglTask"
+    name = "igl_neg"
+    dataset_config = @igl_neg/DatasetConfig()
+    train_or_eval = "train"
+
+#### IGL classes ends ####
+
+base/DatasetConfig:
+    dataset = [
+        "apr_23_dev",
+        "apr_23_dev_remove_last_turn_selection", 
+        "apr_23_dev_remove_current_selection",
+    ]  # 60 games
+    interleave_probabilities = [0.88, 0.06, 0.06]
+    simple_filter = True
+    game_turn_id_include_filepath = "special_game_turn_ids/apr_23_dev_25.txt"  # 102
+
+base/TaskConfig:
+    task = "Seq2SeqTask"
+    name = "base"
+    dataset_config = @base/DatasetConfig()
+    train_or_eval = "train"
+
+base_ood/DatasetConfig:
+    dataset = ["apr_23_train_and_test", "apr_24_train_and_test"]
+    simple_filter = True
+    max_num = 390
+
+base_ood/TaskConfig:
+    task = "Seq2SeqTask"
+    name = "base_ood"
+    dataset_config = @base_ood/DatasetConfig()
+    train_or_eval = "eval"
+
+IglConfig:
+    reward_remap = {1:1, -1:-0.1, 0:0}
+    prob_poor_clamp_min = 0.01
+    label_smoothing = 0.1
+    prompt_id = %igl_prompt_id
+
+MultiTaskConfig:
+    enable_weighted_task_batch = False
+    task_batching_weights = {"base": None, "igl_pos": 0.5, "igl_neg": 0.5}
+    lookahead = False
+
+idefics_transforms.shuffle_context = True
+igl_data_collator.prompt_id = %igl_prompt_id
+
+SftLossConfig:
+    ignore_index = 32001  # Adapter.LABEL_MASK_ID
+    label_smoothing = 0.1
+    temperature_scaling = 1.0
+
+XTrainingArguments:
+    local_config = @LocalConfig()
+    bnb_config = None
+    lora_config = @LoraConfig()
+    igl_config = @IglConfig()
+    task_configs = {
+        ## train tasks
+        "base": @base/TaskConfig(),
+        "igl_pos": @igl_pos/TaskConfig(),
+        "igl_neg": @igl_neg/TaskConfig(),
+        ## eval tasks
+        "base_ood": @base_ood/TaskConfig(),
+    }
+    multi_task_config = @MultiTaskConfig()
+    sft_loss_config = @SftLossConfig()
+
+    output_dir = "local_results"
+    learning_rate = 1e-4
+    lr_scheduler_type = "cosine"
+    warmup_steps = 10
+    lr_scheduler_kwargs = {}
+    num_train_epochs = 20
+
+    weight_decay = 0.01
+
+    bf16 = True
+    per_device_train_batch_size = 2
+    per_device_eval_batch_size = 8
+    gradient_accumulation_steps = 32
+    gradient_checkpointing = False
+    # gradient_checkpointing_kwargs = {"use_reentrant":False}
+    dataloader_pin_memory = True
+    eval_strategy = "epoch"
+    save_strategy = "epoch"
+    save_total_limit = None
+    metric_for_best_model = "eval_base_ood_raw_accuracy"
+    greater_is_better = True
+    load_best_model_at_end = True
+
+    logging_steps = 1
+    remove_unused_columns = False
+    label_names = []
+    report_to = "wandb"
+    optim = "paged_adamw_8bit"
+    seed = 42
+    ignore_data_skip = True  # breaks reproducibility for sake of compute time

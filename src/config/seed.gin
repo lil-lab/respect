@@ -1,0 +1,7 @@
+include 'src/config/multitask.gin'
+
+XTrainingArguments:
+    warmup_steps = 0
+    warmup_ratio = 0
+    lr_scheduler_type = "constant"
+    num_train_epochs = 40

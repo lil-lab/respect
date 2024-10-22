@@ -1,0 +1,10 @@
+{
+  # Treatment level arguments
+  "name": "config for simple open idefics bot",
+  "treatment_name": "idefics",
+  "manager_type": "simple",
+  "checkpoint": "HuggingFaceM4/idefics2-8b",
+  "num_duplicates": 2,
+  "checkpoint_adapter_path": "lil-lab/respect",
+  "revision": "r0",
+}
