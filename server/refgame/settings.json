@@ -1,0 +1,21 @@
+{
+    "galaxy.meteor.com": {
+        "env": {
+            "MONGO_URL": ""
+        }
+    },
+    "admins": [
+        {
+            "username": "lil-lab",
+            "password": ""
+        }
+    ],
+    "public": {
+        "playerIdParam": "assignmentId",
+        "playerIdParamExclusive": true
+    },
+    "preventMatchingIP": false,
+    "botUri": "https://XXX.ngrok.app/predict_target",
+    "controlTreatmentLen": "150",
+    "controlTreatmentQueue": []
+}
