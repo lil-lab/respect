@@ -20,9 +20,9 @@ flags.DEFINE_string("treatment", default="", help="treatment to filter on")
 
 FLAGS = flags.FLAGS
 
-games_folder = Path("data/pickle_files/games/")  # raw pickle files
+games_folder = Path("visualization/pickle_files/games/")  # raw pickle files
 image_folder = Path("data/tangram_pngs")
-config_folder = Path("../tangrams-multiref-dev/refgame/")
+# config_folder = Path("server/refgame/")  # multiref does not have similarity blocks
 
 games_ids_to_ignore = []
 
@@ -44,23 +44,23 @@ def load_raw(pickle_file: Path) -> Dataset:
     if not all_exists:
         raise FileNotFoundError("Not all images exit.")
 
-    def load_similarity_block(config_path):
-        with open(config_folder.joinpath(config_path)) as json_file:
-            c = json.load(json_file)
-        assert len(c['blocks']) == 1
-        blocks = c["blocks"][0]['base']
-        png_blocks = dict()
-        for k, vs in blocks.items():
-            png_blocks[k+'.png'] = [v+'.png' for v in vs]
-        return {"similarity": json.dumps(png_blocks)}
+    # def load_similarity_block(config_path):
+    #     with open(config_folder.joinpath(config_path)) as json_file:
+    #         c = json.load(json_file)
+    #     assert len(c['blocks']) == 1
+    #     blocks = c["blocks"][0]['base']
+    #     png_blocks = dict()
+    #     for k, vs in blocks.items():
+    #         png_blocks[k+'.png'] = [v+'.png' for v in vs]
+    #     return {"similarity": json.dumps(png_blocks)}
 
     ds = Dataset.from_pandas(df2).rename_columns({
         "chat": "chats",
         "context_listener": "context",
         "__index_level_0__": "game_id"
     })
-    ds = ds.map(load_similarity_block, input_columns="config",
-                remove_columns=["config"])
+    # ds = ds.map(load_similarity_block, input_columns="config",
+    #             remove_columns=["config"])
     return ds
 
 
